@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/utils/app_fonts.dart';
-import 'package:horizon_barber/core/widgets/profile_avatar.dart';
+import 'package:horizon_barber/core/widgets/avatar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -30,7 +30,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         GestureDetector(
           onTap: () => context.push("/profile"),
-          child: const ProfileAvatar(),
+          child: Avatar(
+            photoUrl:
+                "https://avatars.githubusercontent.com/u/196840558?v=4&size=64",
+          ),
         ),
       ],
     );

@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 
-class ProfileAvatar extends StatelessWidget {
-  const ProfileAvatar({super.key});
+class Avatar extends StatelessWidget {
+  double size;
+  String photoUrl;
+  Color borderColor;
+  Avatar({
+    super.key,
+    this.size = 40,
+    this.photoUrl = "",
+    this.borderColor = AppColors.textMuted,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,21 +19,19 @@ class ProfileAvatar extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: AppColors.textMuted, width: 1.5),
+          border: Border.all(color: borderColor, width: 2),
         ),
         child: SizedBox(
-          width: 40,
-          height: 40,
+          width: size,
+          height: size,
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Icon(Icons.person, color: AppColors.textMuted, size: 25),
+              Icon(Icons.person, color: AppColors.textMuted, size: size - 15),
               CircleAvatar(
-                radius: 20,
+                radius: size,
                 backgroundColor: Colors.transparent,
-                backgroundImage: const NetworkImage(
-                  "https://avatars.githubusercontent.com/u/196840558?v=4&size=64",
-                ),
+                backgroundImage: NetworkImage(photoUrl),
               ),
             ],
           ),
