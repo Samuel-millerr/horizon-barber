@@ -2,47 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/widgets/custom_app_bar.dart';
 import 'package:horizon_barber/core/widgets/custom_bottom_nav_bar.dart';
-import 'package:horizon_barber/features/home/home_page.dart';
 
-class MainScaffold extends StatefulWidget {
-  const MainScaffold({super.key});
-
-  @override
-  State<MainScaffold> createState() => _MainScaffoldState();
-}
-
-class _MainScaffoldState extends State<MainScaffold> {
-  int currentIndex = 0;
-  final List<Widget> screens = [
-    Center(child: HomePage()),
-    Center(child: Text("CORTES")),
-    Center(child: Text("AGENDA")),
-  ];
-
-  void changeIndex(int newIndex) {
-    setState(() {
-      currentIndex = newIndex;
-    });
-  }
+class MainScaffold extends StatelessWidget {
+  final Widget child;
+  const MainScaffold({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
-      body: IndexedStack(index: currentIndex, children: screens),
+      appBar: const CustomAppBar(),
+      body: child,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-              color: AppColors.border,
-              width: 1,
-            ), // Custom top border
-          ),
+          border: Border(top: BorderSide(color: AppColors.border, width: 1)),
         ),
-        child: CustomBottomNavBar(
-          currentIndex: currentIndex,
-          changeIndex: changeIndex,
-        ),
+        child: CustomBottomNavBar(),
       ),
     );
   }

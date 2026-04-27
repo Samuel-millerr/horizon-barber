@@ -6,10 +6,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsetsGeometry.all(15),
-        child: Column(children: [Column()]),
-      ),
+      body: Container(child: Column(children: [Column()])),
     );
   }
 }

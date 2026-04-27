@@ -1,36 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/utils/app_fonts.dart';
 
-class CustomBottomNavBar extends StatefulWidget {
-  final int currentIndex;
-  final Function(int) changeIndex;
-  const CustomBottomNavBar({
-    super.key,
-    required this.changeIndex,
-    required this.currentIndex,
-  });
+class CustomBottomNavBar extends StatelessWidget {
+  const CustomBottomNavBar({super.key});
 
-  @override
-  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
-}
+  static const routes = ["/home"];
 
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
+  int locationToIndex(String location) {
+    return routes.indexWhere((r) => location.startsWith(r)).clamp(0, 2);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      selectedLabelStyle: AppFonts.condFont(
-        color: AppColors.gold,
-        size: 12,
-      ),
+    final location = GoRouterState.of(context).uri.toString();
+    final currentIndex = locationToIndex(location);
 
+    return BottomNavigationBar(
+      selectedLabelStyle: AppFonts.condFont(color: AppColors.gold, size: 12),
       unselectedLabelStyle: AppFonts.condFont(
         color: AppColors.textMuted,
         size: 12,
       ),
-
-      currentIndex: widget.currentIndex,
-      onTap: widget.changeIndex,
+      currentIndex: currentIndex,
+      onTap: (i) => context.go(routes[i]),
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "INÍCIO"),
         BottomNavigationBarItem(icon: Icon(Icons.abc), label: "AGENDAMENTO"),
