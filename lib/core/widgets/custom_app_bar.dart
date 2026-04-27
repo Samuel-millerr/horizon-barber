@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/utils/app_fonts.dart';
+import 'package:horizon_barber/core/widgets/profile_avatar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -21,13 +22,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           Text(
             "BARBEARIA CLÁSSICA",
-            style: AppFonts.condFont(
-              color: AppColors.textMuted,
-              size: 16,
-            ),
+            style: AppFonts.condFont(color: AppColors.textMuted, size: 16),
           ),
         ],
       ),
+      actions: [ProfileAvatar()],
     );
   }
 

@@ -27,7 +27,7 @@ class SchedulingCard extends StatelessWidget {
             Text(
               service.title,
               style: AppFonts.bodyFont(
-                size: 16,
+                size: 18,
                 color: AppColors.text,
                 weight: FontWeight.w700,
               ),
