@@ -17,13 +17,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           Text(
             "Barber Horizon",
-            style: AppFonts.mainFontMedium(color: AppColors.gold, size: 20),
+            style: AppFonts.mainFont(color: AppColors.gold, size: 22),
           ),
           Text(
             "BARBEARIA CLÁSSICA",
-            style: AppFonts.condFontMedium(
+            style: AppFonts.condFont(
               color: AppColors.textMuted,
-              size: 14,
+              size: 16,
             ),
           ),
         ],

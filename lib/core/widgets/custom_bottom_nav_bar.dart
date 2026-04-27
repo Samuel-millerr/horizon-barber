@@ -19,12 +19,12 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      selectedLabelStyle: AppFonts.condFontMedium(
+      selectedLabelStyle: AppFonts.condFont(
         color: AppColors.gold,
         size: 12,
       ),
 
-      unselectedLabelStyle: AppFonts.condFontMedium(
+      unselectedLabelStyle: AppFonts.condFont(
         color: AppColors.textMuted,
         size: 12,
       ),

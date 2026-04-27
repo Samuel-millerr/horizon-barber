@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/widgets/custom_app_bar.dart';
 import 'package:horizon_barber/core/widgets/custom_bottom_nav_bar.dart';
+import 'package:horizon_barber/features/home/home_page.dart';
 
 class MainScaffold extends StatefulWidget {
   const MainScaffold({super.key});
@@ -13,7 +14,7 @@ class MainScaffold extends StatefulWidget {
 class _MainScaffoldState extends State<MainScaffold> {
   int currentIndex = 0;
   final List<Widget> screens = [
-    Center(child: Text("INÍCIO")),
+    Center(child: HomePage()),
     Center(child: Text("CORTES")),
     Center(child: Text("AGENDA")),
   ];
@@ -34,7 +35,7 @@ class _MainScaffoldState extends State<MainScaffold> {
           border: Border(
             top: BorderSide(
               color: AppColors.border,
-              width: 2.5,
+              width: 1,
             ), // Custom top border
           ),
         ),
