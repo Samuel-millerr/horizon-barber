@@ -1,16 +1,16 @@
-class BarberService {
+class BarberServiceInterface {
   final String title;
   final String price;
   final String schedulingTime;
 
-  BarberService({
+  BarberServiceInterface({
     required this.title,
     required this.price,
     required this.schedulingTime,
   });
 
-  factory BarberService.fromJson(Map<String, dynamic> json) {
-    return BarberService(
+  factory BarberServiceInterface.fromJson(Map<String, dynamic> json) {
+    return BarberServiceInterface(
       title: json["title"] ?? "",
       price: json["price"] ?? "",
       schedulingTime: json["schedulingTime"] ?? "",

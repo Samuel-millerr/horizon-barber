@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/utils/app_fonts.dart';
 import 'package:horizon_barber/features/home/widgets/scheduling_card.dart';
-import 'package:horizon_barber/interfaces/barber_service.dart';
+import 'package:horizon_barber/interfaces/barber_service_interface.dart';
 
 class HomeBody extends StatelessWidget {
-  final List<Map<String, dynamic>> barberServices = [
+  final List<Map<String, dynamic>> BarberServiceInterfaces = [
     {"id": 1, "title": "Corte Classico", "price": "35.00", "schedulingTime": "30"},
     {"id": 2, "title": "Corte Classico", "price": "35.00", "schedulingTime": "30"},
   ];
@@ -28,8 +28,8 @@ class HomeBody extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10),
-          for (Map<String, dynamic> item in barberServices)
-            SchedulingCard(service: BarberService.fromJson(item)),
+          for (Map<String, dynamic> item in BarberServiceInterfaces)
+            SchedulingCard(service: BarberServiceInterface.fromJson(item)),
         ],
       ),
     );

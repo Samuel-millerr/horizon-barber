@@ -8,6 +8,7 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsetsGeometry.all(16),
       decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(color: AppColors.border),
@@ -21,30 +22,27 @@ class HomeHeader extends StatelessWidget {
       ),
       height: MediaQuery.of(context).size.height * 0.175,
       width: double.infinity,
-      child: Padding(
-        padding: EdgeInsetsGeometry.all(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "BEM-VINDO",
-              style: AppFonts.condFont(size: 15, color: AppColors.textMuted),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "BEM-VINDO",
+            style: AppFonts.condFont(size: 15, color: AppColors.textMuted),
+          ),
+          Text(
+            "Nome",
+            style: AppFonts.mainFont(
+              size: 29,
+              color: AppColors.text,
+              weight: FontWeight.w700,
             ),
-            Text(
-              "Nome",
-              style: AppFonts.mainFont(
-                size: 29,
-                color: AppColors.text,
-                weight: FontWeight.w700,
-              ),
-            ),
-            Text(
-              "Pronto para renovar seu estilo?",
-              style: AppFonts.bodyFont(size: 16, color: AppColors.textMuted),
-            ),
-          ],
-        ),
+          ),
+          Text(
+            "Pronto para renovar seu estilo?",
+            style: AppFonts.bodyFont(size: 16, color: AppColors.textMuted),
+          ),
+        ],
       ),
     );
   }
