@@ -11,4 +11,6 @@ class AppColors {
   static const Color text = Color(0xFFe8e0d4);
   static const Color textMuted = Color(0xFF8a8278);
   static const Color gold = Color(0xFFc9a84c);
+  static const Color success = Color(0xFF2e8b57);
+  static const Color danger = Color(0xFFc0392b);
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/utils/app_fonts.dart';
 import 'package:horizon_barber/core/widgets/avatar.dart';
+import 'package:horizon_barber/features/profile/widgets/localization_card.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -10,7 +11,7 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16),
-      height: MediaQuery.of(context).size.height * 0.175,
+      height: MediaQuery.of(context).size.height * 0.35,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,6 +55,8 @@ class ProfileHeader extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 10),
+          LocalizationCard(),
         ],
       ),
     );

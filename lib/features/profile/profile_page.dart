@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
+import 'package:horizon_barber/features/profile/widgets/profile_body.dart';
 import 'package:horizon_barber/features/profile/widgets/profile_header.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -10,7 +11,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: AppColors.bg,
-        child: Column(children: [ProfileHeader()]),
+        child: Column(children: [ProfileHeader(), ProfileBody()]),
       ),
     );
   }

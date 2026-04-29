@@ -9,8 +9,8 @@ final GoRouter appRouter = GoRouter(
     ShellRoute(
       builder: (context, state, child) => MainScaffold(child: child),
       routes: [
-        GoRoute(path: "/home", builder: (_, __) => const HomePage()),
-        GoRoute(path: "/profile", builder: (_, __) => const ProfilePage()),
+        GoRoute(path: "/home", builder: (_, _) => const HomePage()),
+        GoRoute(path: "/profile", builder: (_, _) => const ProfilePage()),
       ],
     ),
   ],

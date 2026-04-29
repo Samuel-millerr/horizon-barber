@@ -4,8 +4,8 @@ import 'package:horizon_barber/core/utils/app_fonts.dart';
 import 'package:horizon_barber/interfaces/barber_service_interface.dart';
 
 class SchedulingCard extends StatelessWidget {
-  final BarberServiceInterface service;
-  const SchedulingCard({super.key, required this.service});
+  final BarberServiceInterface interface;
+  const SchedulingCard({super.key, required this.interface});
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +25,19 @@ class SchedulingCard extends StatelessWidget {
           spacing: 2,
           children: [
             Text(
-              service.title,
+              interface.title,
               style: AppFonts.bodyFont(
                 size: 18,
                 color: AppColors.text,
-                weight: FontWeight.w700,
+                weight: FontWeight.w600,
               ),
             ),
             Text(
-              "R\$ ${service.price}",
+              "R\$ ${interface.price}",
               style: AppFonts.bodyFont(size: 14, color: AppColors.gold),
             ),
             Text(
-              "⏱ ${service.schedulingTime} min",
+              "⏱ ${interface.schedulingTime} min",
               style: AppFonts.bodyFont(size: 12, color: AppColors.textMuted),
             ),
           ],

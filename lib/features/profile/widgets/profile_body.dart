@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:horizon_barber/core/utils/app_colors.dart';
+import 'package:horizon_barber/core/widgets/body_title.dart';
+import 'package:horizon_barber/features/profile/widgets/suport_service.dart';
+
+class ProfileBody extends StatelessWidget {
+  ProfileBody({super.key});
+
+  List<Map<String, dynamic>> suportServices = [
+    {
+      "serviceIcon": Icons.phone,
+      "serviceTitle": "Fale Conosco",
+      "serviceIconColor": AppColors.danger,
+    },
+    {
+      "serviceIcon": Icons.star,
+      "serviceTitle": "Avaliar App",
+      "serviceIconColor": AppColors.gold,
+    },
+    {
+      "serviceIcon": Icons.door_back_door,
+      "serviceTitle": "Sair da Conta",
+      "serviceIconColor": AppColors.textMuted,
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        spacing: 2,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BodyTitle(title: "SUPORTE"),
+          const SizedBox(height: 14),
+          for (Map<String, dynamic> suportService in suportServices) ...[
+            SuportService(
+              serviceIcon: suportService["serviceIcon"],
+              serviceTitle: suportService["serviceTitle"],
+              serviceIconColor: suportService["serviceIconColor"],
+            ),
+            Divider(color: AppColors.textMuted, thickness: 0.3),
+          ],
+        ],
+      ),
+    );
+  }
+}
