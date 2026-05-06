@@ -9,7 +9,6 @@ class LocalizationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 4,
       color: AppColors.success.withAlpha(35),
       shape: RoundedRectangleBorder(
@@ -17,15 +16,16 @@ class LocalizationCard extends StatelessWidget {
         side: const BorderSide(color: AppColors.success, width: 0.5),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 4,
           children: [
-            Row(
+            Wrap(
               spacing: 8,
+              runSpacing: 4,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Icon(Icons.pin_drop, color: AppColors.danger, size: 20),
+                Icon(Icons.pin_drop, color: AppColors.danger, size: 18),
                 Text(
                   "Localização da Barbearia",
                   style: AppFonts.condFont(
@@ -36,6 +36,7 @@ class LocalizationCard extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 4),
             Text(
               "Av. Monte Castelo, 392 - Jardim Proença, Campinas - SP",
               style: AppFonts.bodyFont(
@@ -44,7 +45,7 @@ class LocalizationCard extends StatelessWidget {
                 weight: FontWeight.w400,
               ),
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 8),
             RedirectButton(),
           ],
         ),

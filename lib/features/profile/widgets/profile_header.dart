@@ -10,48 +10,53 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
-      height: MediaQuery.of(context).size.height * 0.35,
+      padding: const EdgeInsets.all(16),
       width: double.infinity,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
-          Avatar(
-            borderColor: AppColors.gold,
-            size: 72,
-            photoUrl:
-                "https://avatars.githubusercontent.com/u/196840558?v=4&size=64",
-          ),
-          Text(
-            "Nome",
-            style: AppFonts.mainFont(
-              color: AppColors.text,
-              size: 24,
-              weight: FontWeight.w600,
-            ),
-          ),
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "199",
-                style: AppFonts.condFont(
-                  size: 16,
-                  color: AppColors.textMuted,
-                  weight: FontWeight.w400,
-                ),
-              ),
-              Icon(
-                Icons.horizontal_rule_rounded,
-                color: AppColors.textMuted,
-                size: 16,
+              Avatar(
+                borderColor: AppColors.gold,
+                size: 72,
+                photoUrl:
+                    "https://avatars.githubusercontent.com/u/196840558?v=4&size=64",
               ),
               Text(
-                "Cliente desde 2024",
-                style: AppFonts.condFont(
-                  size: 16,
-                  color: AppColors.textMuted,
-                  weight: FontWeight.w400,
+                "Nome",
+                style: AppFonts.mainFont(
+                  color: AppColors.text,
+                  size: 24,
+                  weight: FontWeight.w600,
                 ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    "199",
+                    style: AppFonts.condFont(
+                      size: 16,
+                      color: AppColors.textMuted,
+                      weight: FontWeight.w400,
+                    ),
+                  ),
+                  Icon(
+                    Icons.horizontal_rule_rounded,
+                    color: AppColors.textMuted,
+                    size: 16,
+                  ),
+                  Text(
+                    "Cliente desde 2024",
+                    style: AppFonts.condFont(
+                      size: 16,
+                      color: AppColors.textMuted,
+                      weight: FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

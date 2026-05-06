@@ -6,7 +6,7 @@ import 'package:horizon_barber/core/utils/app_fonts.dart';
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
 
-  static const routes = ["/home"];
+  static const routes = ["/home", "/new-schedule"];
 
   int locationToIndex(String location) {
     return routes.indexWhere((r) => location.startsWith(r)).clamp(0, 2);
