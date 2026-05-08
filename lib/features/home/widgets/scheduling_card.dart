@@ -25,7 +25,7 @@ class SchedulingCard extends StatelessWidget {
           spacing: 2,
           children: [
             Text(
-              interface.title,
+              interface.name,
               style: AppFonts.bodyFont(
                 size: 18,
                 color: AppColors.text,
@@ -33,11 +33,11 @@ class SchedulingCard extends StatelessWidget {
               ),
             ),
             Text(
-              "R\$ ${interface.price}",
+              "R\$ ${interface.price.toStringAsFixed(2)}",
               style: AppFonts.bodyFont(size: 14, color: AppColors.gold),
             ),
             Text(
-              "⏱ ${interface.schedulingTime} min",
+              "⏱ ${interface.durationMinutes} min",
               style: AppFonts.bodyFont(size: 12, color: AppColors.textMuted),
             ),
           ],

@@ -5,8 +5,8 @@ import 'package:horizon_barber/interfaces/barber_service_interface.dart';
 
 class HomeBody extends StatelessWidget {
   final List<Map<String, dynamic>> barberServices = [
-    {"id": 1, "title": "Corte Classico", "price": "35.00", "schedulingTime": "30"},
-    {"id": 2, "title": "Corte Classico", "price": "35.00", "schedulingTime": "30"},
+    {"id": 1, "name": "Corte Classico", "price": 35.00, "durationMinutes": 30},
+    {"id": 2, "name": "Corte Classico", "price": 35.00, "durationMinutes": 30},
   ];
   HomeBody({super.key});
 
