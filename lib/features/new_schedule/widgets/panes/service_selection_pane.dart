@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:horizon_barber/core/widgets/body_title.dart';
-import 'package:horizon_barber/features/new_schedule/widgets/service_card.dart';
-import 'package:horizon_barber/interfaces/barber_service_interface.dart';
+import "package:flutter/material.dart";
+import "package:horizon_barber/core/widgets/body_title.dart";
+import "package:horizon_barber/features/new_schedule/widgets/service_card.dart";
+import "package:horizon_barber/interfaces/barber_service_interface.dart";
 
 class ServiceSelectionPane extends StatefulWidget {
   final Function(BarberServiceInterface) onServiceSelected;

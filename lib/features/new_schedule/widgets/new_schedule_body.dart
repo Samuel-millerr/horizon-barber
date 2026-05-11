@@ -1,27 +1,31 @@
-import 'package:flutter/material.dart';
-import 'package:horizon_barber/features/new_schedule/widgets/panes/service_selection_pane.dart';
-import 'package:horizon_barber/features/new_schedule/widgets/progress_bar.dart';
-import 'package:horizon_barber/interfaces/barber_service_interface.dart';
+import "package:flutter/material.dart";
+import "package:horizon_barber/features/new_schedule/widgets/panes/calendar_pane.dart";
+import "package:horizon_barber/features/new_schedule/widgets/panes/service_selection_pane.dart";
+import "package:horizon_barber/features/new_schedule/widgets/panes/summary_pane.dart";
+import "package:horizon_barber/features/new_schedule/widgets/progress_bar.dart";
+import "package:horizon_barber/interfaces/barber_service_interface.dart";
 
 class NewScheduleBody extends StatelessWidget {
-  // Pode ser Stateless já que o estado vive no Pai
   final int currentStep;
   final PageController pageController;
   final BarberServiceInterface? selectedService;
+  final DateTime? selectedDate;
   final Function(BarberServiceInterface) onServiceSelected;
+  final ValueChanged<DateTime> onDateSelected;
 
   const NewScheduleBody({
     super.key,
     required this.currentStep,
     required this.pageController,
     required this.selectedService,
+    required this.selectedDate,
     required this.onServiceSelected,
+    required this.onDateSelected,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      // Coloquei o Expanded aqui para ocupar o espaço entre header e footer
       child: Column(
         children: [
           Padding(
@@ -40,13 +44,18 @@ class NewScheduleBody extends StatelessWidget {
                     onServiceSelected: onServiceSelected,
                   ),
                 ),
-                const Center(
-                  child: Text("Data", style: TextStyle(color: Colors.white)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 22),
+                  child: CalendarPane(
+                    selectedDate: selectedDate,
+                    onDateSelected: onDateSelected,
+                  ),
                 ),
-                const Center(
-                  child: Text(
-                    "Confirmação",
-                    style: TextStyle(color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 22),
+                  child: SummaryPane(
+                    selectedService: selectedService,
+                    selectedDate: selectedDate,
                   ),
                 ),
               ],

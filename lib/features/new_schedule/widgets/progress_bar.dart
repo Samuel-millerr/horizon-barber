@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:horizon_barber/core/utils/app_colors.dart';
-import 'package:horizon_barber/core/utils/app_fonts.dart';
+import "package:flutter/material.dart";
+import "package:horizon_barber/core/utils/app_colors.dart";
+import "package:horizon_barber/core/utils/app_fonts.dart";
 
 enum ProgressBarStepStatus { done, current, pending }
 
@@ -18,7 +18,6 @@ class ProgressBar extends StatelessWidget {
 
   static const List<String> labels = ["SERVIÇO", "DATA", "CONFIRMAR"];
 
-  // Retorna o indice específico permitindo a mudança do status
   ProgressBarStepStatus statusOf(int index) {
     if (index < currentStep) return ProgressBarStepStatus.done;
     if (index == currentStep) return ProgressBarStepStatus.current;

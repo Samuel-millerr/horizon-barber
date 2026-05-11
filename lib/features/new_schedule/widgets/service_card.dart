@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:horizon_barber/core/utils/app_colors.dart';
-import 'package:horizon_barber/core/utils/app_fonts.dart';
-import 'package:horizon_barber/interfaces/barber_service_interface.dart';
+import "package:flutter/material.dart";
+import "package:horizon_barber/core/utils/app_colors.dart";
+import "package:horizon_barber/core/utils/app_fonts.dart";
+import "package:horizon_barber/interfaces/barber_service_interface.dart";
 
 class ServiceCard extends StatelessWidget {
   final BarberServiceInterface interface;

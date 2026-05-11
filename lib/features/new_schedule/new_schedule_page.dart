@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:horizon_barber/core/utils/app_colors.dart';
-import 'package:horizon_barber/core/widgets/custom_page_header.dart';
-import 'package:horizon_barber/features/new_schedule/widgets/navigation_buttons.dart';
-import 'package:horizon_barber/features/new_schedule/widgets/new_schedule_body.dart';
-import 'package:horizon_barber/interfaces/barber_service_interface.dart';
+import "package:flutter/material.dart";
+import "package:horizon_barber/core/utils/app_colors.dart";
+import "package:horizon_barber/core/widgets/custom_page_header.dart";
+import "package:horizon_barber/features/new_schedule/widgets/navigation_buttons.dart";
+import "package:horizon_barber/features/new_schedule/widgets/new_schedule_body.dart";
+import "package:horizon_barber/interfaces/barber_service_interface.dart";
 
 class NewSchedulePage extends StatefulWidget {
   const NewSchedulePage({super.key});
@@ -15,10 +15,9 @@ class NewSchedulePage extends StatefulWidget {
 class _NewSchedulePageState extends State<NewSchedulePage> {
   final PageController pageController = PageController();
   int currentStep = 0;
-  final int totalSteps = 4;
+  final int totalSteps = 3;
   BarberServiceInterface? selectedService;
   DateTime? selectedDate;
-  String? selectedTime;
 
   void prevStep() {
     if (currentStep > 0) {
@@ -39,6 +38,13 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
       return;
     }
 
+    if (currentStep == 1 && selectedDate == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Selecione uma data para continuar")),
+      );
+      return;
+    }
+
     if (currentStep < totalSteps - 1) {
       setState(() => currentStep++);
       pageController.animateToPage(
@@ -55,7 +61,6 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
     final body = {
       "service_id": selectedService?.name,
       "date": selectedDate.toString(),
-      "time": selectedTime,
     };
     print("Enviando para API: $body");
   }
@@ -64,20 +69,25 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bg,
-      // Dentro do build da NewSchedulePage
       body: Column(
         children: [
           CustomPageHeader(
             title: "Novo Agendamento",
-            subTitle: "Escolha o serviço, data e horário desejados",
+            subTitle: "Escolha o servico e a data desejada",
           ),
           NewScheduleBody(
             currentStep: currentStep,
             pageController: pageController,
             selectedService: selectedService,
+            selectedDate: selectedDate,
             onServiceSelected: (service) {
               setState(() {
                 selectedService = service;
+              });
+            },
+            onDateSelected: (date) {
+              setState(() {
+                selectedDate = date;
               });
             },
           ),
