@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
+import "package:horizon_barber/core/services/api_service.dart";
 import "package:horizon_barber/core/utils/app_colors.dart";
 import "package:horizon_barber/core/utils/app_fonts.dart";
 import "package:horizon_barber/features/login_signup/widgets/login_field.dart";
@@ -35,19 +36,18 @@ class _SingUpPageState extends State<SingUpPage> {
     setState(() => _isLoading = true);
 
     try {
-      UserFullInterface user = UserFullInterface(
-        fullName: _nameController.text.trim(),
+      UserInterface user = UserInterface(
+        username: _nameController.text.trim(),
         password: _passwordController.text.trim(),
         number: _numberController.text.trim(),
         photoUrl: _photoUrlController.text.trim(),
       );
-      print(user.toJson());
-      // final userName = _nameController.text.trim();
-      // await ApiService.login(
-      //   userName: userName,
-      //   password: _passwordController.text,
-      // );
-      // AppSession.saveUserName(userName);
+
+      final result = await ApiService.register(user: user.toJson());
+
+      if (result["success"]) {
+        
+      }
 
       if (!mounted) return;
       context.go("/login");

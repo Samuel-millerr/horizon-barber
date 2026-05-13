@@ -1,31 +1,11 @@
 class UserInterface {
-  final String fullName;
-  final String number;
-  final String photoUrl;
-
-  UserInterface({
-    required this.fullName,
-    required this.number,
-    required this.photoUrl,
-  });
-
-  factory UserInterface.fromJson(Map<String, dynamic> json) {
-    return UserInterface(
-      fullName: json["fullName"],
-      number: "number",
-      photoUrl: json["photoUrl"],
-    );
-  }
-}
-
-class UserFullInterface {
-  final String fullName;
+  final String username;
   final String password;
   final String number;
   final String? photoUrl;
 
-  UserFullInterface({
-    required this.fullName,
+  UserInterface({
+    required this.username,
     required this.password,
     required this.number,
     this.photoUrl,
@@ -33,7 +13,7 @@ class UserFullInterface {
 
   Map<String, dynamic> toJson() {
     return {
-      "fullName": fullName,
+      "username": username,
       "password": password,
       "number": number,
       "photoUrl": photoUrl,
