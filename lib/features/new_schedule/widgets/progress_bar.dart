@@ -16,7 +16,7 @@ class ProgressBar extends StatelessWidget {
 
   const ProgressBar({super.key, required this.currentStep});
 
-  static const List<String> labels = ["SERVIÇO", "DATA", "CONFIRMAR"];
+  static const List<String> labels = ["SERVIÇO", "CONFIRMAR"];
 
   ProgressBarStepStatus statusOf(int index) {
     if (index < currentStep) return ProgressBarStepStatus.done;
@@ -26,14 +26,20 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (int i = 0; i < labels.length; i++) ...[
-          StepDot(index: i, label: labels[i], status: statusOf(i)),
-          if (i < labels.length - 1) StepConnector(done: i < currentStep),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 14),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: AppColors.border, width: 2)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          for (int i = 0; i < labels.length; i++) ...[
+            StepDot(index: i, label: labels[i], status: statusOf(i)),
+            if (i < labels.length - 1) StepConnector(done: i < currentStep),
+          ],
         ],
-      ],
+      ),
     );
   }
 }
@@ -44,6 +50,7 @@ class StepDot extends StatelessWidget {
   final ProgressBarStepStatus status;
 
   const StepDot({
+    super.key,
     required this.index,
     required this.label,
     required this.status,
@@ -111,12 +118,12 @@ class StepDot extends StatelessWidget {
 class StepConnector extends StatelessWidget {
   final bool done;
 
-  const StepConnector({required this.done});
+  const StepConnector({super.key, required this.done});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 18, left: 12, right: 14),
+      padding: const EdgeInsets.only(bottom: 18, left: 12, right: 5),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         width: MediaQuery.of(context).size.width * 0.125,

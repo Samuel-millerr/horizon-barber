@@ -6,7 +6,7 @@ import 'package:horizon_barber/core/utils/app_fonts.dart';
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
 
-  static const routes = ["/home", "/new-schedule"];
+  static const routes = ["/home", "/new-schedule", "/profile"];
 
   int locationToIndex(String location) {
     return routes.indexWhere((r) => location.startsWith(r)).clamp(0, 2);
@@ -27,10 +27,13 @@ class CustomBottomNavBar extends StatelessWidget {
       onTap: (i) => context.go(routes[i]),
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "INÍCIO"),
-        BottomNavigationBarItem(icon: Icon(Icons.abc), label: "AGENDAMENTO"),
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
-          label: "AGENDA",
+          label: "AGENDAMENTO",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_outline),
+          label: "PERFIL",
         ),
       ],
       backgroundColor: AppColors.bg,

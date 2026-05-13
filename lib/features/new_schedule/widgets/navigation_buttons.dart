@@ -18,68 +18,76 @@ class NavigationButtons extends StatelessWidget {
 
   String get nextLabel {
     if (currentStep == totalSteps - 1) return "CONFIRMAR AGENDAMENTO";
-    if (currentStep == 1) return "CONTINUAR -> RESUMO";
+    if (currentStep == 1) return "CONTINUAR";
     return "PROXIMO";
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 14, 20, 18),
-      decoration: BoxDecoration(
-        color: AppColors.bg,
-        border: Border(top: BorderSide(color: AppColors.border, width: 0.5)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: onNext,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.gold,
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(999),
-                ),
-              ),
-              child: Text(
-                nextLabel,
-                textAlign: TextAlign.center,
-                style: AppFonts.condFont(
-                  color: AppColors.bg,
-                  size: 15,
-                  weight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          if (currentStep > 0) ...[
-            const SizedBox(height: 12),
+    return SafeArea(
+      top: false,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+        decoration: BoxDecoration(
+          color: AppColors.bg,
+          border: Border(top: BorderSide(color: AppColors.border, width: 0.5)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
             SizedBox(
               width: double.infinity,
-              child: OutlinedButton(
-                onPressed: onBack,
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: AppColors.border),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+              height: 46,
+              child: ElevatedButton(
+                onPressed: onNext,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.gold,
+                  padding: EdgeInsets.zero,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(999),
                   ),
                 ),
-                child: Text(
-                  "<- VOLTAR",
-                  style: AppFonts.condFont(
-                    color: AppColors.textMuted,
-                    size: 14,
-                    weight: FontWeight.w600,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    nextLabel,
+                    textAlign: TextAlign.center,
+                    style: AppFonts.condFont(
+                      color: AppColors.bg,
+                      size: 15,
+                      weight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
             ),
+            if (currentStep > 0) ...[
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                height: 42,
+                child: OutlinedButton(
+                  onPressed: onBack,
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: AppColors.border),
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                  ),
+                  child: Text(
+                    "VOLTAR",
+                    style: AppFonts.condFont(
+                      color: AppColors.textMuted,
+                      size: 14,
+                      weight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

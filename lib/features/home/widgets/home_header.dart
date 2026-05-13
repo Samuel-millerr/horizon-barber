@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:horizon_barber/core/session/app_session.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/utils/app_fonts.dart';
 
@@ -30,13 +31,18 @@ class HomeHeader extends StatelessWidget {
             "BEM-VINDO",
             style: AppFonts.condFont(size: 15, color: AppColors.textMuted),
           ),
-          Text(
-            "Nome",
-            style: AppFonts.mainFont(
-              size: 29,
-              color: AppColors.text,
-              weight: FontWeight.w700,
-            ),
+          ValueListenableBuilder<String?>(
+            valueListenable: AppSession.userName,
+            builder: (context, userName, _) {
+              return Text(
+                userName?.isNotEmpty == true ? userName! : "Cliente",
+                style: AppFonts.mainFont(
+                  size: 29,
+                  color: AppColors.text,
+                  weight: FontWeight.w700,
+                ),
+              );
+            },
           ),
           Text(
             "Pronto para renovar seu estilo?",

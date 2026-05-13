@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:horizon_barber/core/session/app_session.dart';
 import 'package:horizon_barber/core/utils/app_colors.dart';
 import 'package:horizon_barber/core/widgets/body_title.dart';
 import 'package:horizon_barber/features/profile/widgets/suport_service.dart';
 
 class ProfileBody extends StatelessWidget {
-  ProfileBody({super.key});
-
-  List<Map<String, dynamic>> suportServices = [
-    {
-      "serviceIcon": Icons.phone,
-      "serviceTitle": "Fale Conosco",
-      "serviceIconColor": AppColors.danger,
-    },
-    {
-      "serviceIcon": Icons.star,
-      "serviceTitle": "Avaliar App",
-      "serviceIconColor": AppColors.gold,
-    },
-    {
-      "serviceIcon": Icons.door_back_door,
-      "serviceTitle": "Sair da Conta",
-      "serviceIconColor": AppColors.textMuted,
-    },
-  ];
+  const ProfileBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final suportServices = [
+      {
+        "serviceIcon": Icons.phone,
+        "serviceTitle": "Fale Conosco",
+        "serviceIconColor": AppColors.danger,
+      },
+      {
+        "serviceIcon": Icons.star,
+        "serviceTitle": "Avaliar App",
+        "serviceIconColor": AppColors.gold,
+      },
+      {
+        "serviceIcon": Icons.door_back_door,
+        "serviceTitle": "Sair da Conta",
+        "serviceIconColor": AppColors.textMuted,
+        "function": () {
+          AppSession.clear();
+          context.go("/login");
+        },
+      },
+    ];
+
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(16),
@@ -40,6 +46,7 @@ class ProfileBody extends StatelessWidget {
               serviceIcon: suportService["serviceIcon"],
               serviceTitle: suportService["serviceTitle"],
               serviceIconColor: suportService["serviceIconColor"],
+              onTap: suportService["function"],
             ),
             Divider(color: AppColors.textMuted, thickness: 0.3),
           ],

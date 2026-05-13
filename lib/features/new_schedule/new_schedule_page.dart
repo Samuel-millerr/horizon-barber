@@ -1,4 +1,7 @@
 import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
+import "package:horizon_barber/core/services/api_service.dart";
+import "package:horizon_barber/core/session/app_session.dart";
 import "package:horizon_barber/core/utils/app_colors.dart";
 import "package:horizon_barber/core/widgets/custom_page_header.dart";
 import "package:horizon_barber/features/new_schedule/widgets/navigation_buttons.dart";
@@ -15,9 +18,15 @@ class NewSchedulePage extends StatefulWidget {
 class _NewSchedulePageState extends State<NewSchedulePage> {
   final PageController pageController = PageController();
   int currentStep = 0;
-  final int totalSteps = 3;
+  final int totalSteps = 2;
   BarberServiceInterface? selectedService;
-  DateTime? selectedDate;
+  bool isSending = false;
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   void prevStep() {
     if (currentStep > 0) {
@@ -38,13 +47,6 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
       return;
     }
 
-    if (currentStep == 1 && selectedDate == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Selecione uma data para continuar")),
-      );
-      return;
-    }
-
     if (currentStep < totalSteps - 1) {
       setState(() => currentStep++);
       pageController.animateToPage(
@@ -57,47 +59,62 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
     }
   }
 
-  void finishAppointment() {
-    final body = {
-      "service_id": selectedService?.name,
-      "date": selectedDate.toString(),
-    };
-    print("Enviando para API: $body");
+  Future<void> finishAppointment() async {
+    final userName = AppSession.currentUserName;
+    final service = selectedService;
+
+    if (userName == null || userName.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Faca login antes de agendar")),
+      );
+      context.go("/login");
+      return;
+    }
+
+    if (service == null) return;
+
+    setState(() => isSending = true);
+
+    try {
+      await ApiService.createAppointment(userName: userName, service: service);
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Agendamento enviado com sucesso")),
+      );
+      context.go("/home");
+    } finally {
+      if (mounted) setState(() => isSending = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.bg,
-      body: Column(
+    return Container(
+      color: AppColors.bg,
+      child: Column(
         children: [
           CustomPageHeader(
             title: "Novo Agendamento",
-            subTitle: "Escolha o servico e a data desejada",
+            subTitle: "Escolha o servico, a data e o horario desejados",
           ),
           NewScheduleBody(
             currentStep: currentStep,
             pageController: pageController,
             selectedService: selectedService,
-            selectedDate: selectedDate,
             onServiceSelected: (service) {
               setState(() {
                 selectedService = service;
               });
             },
-            onDateSelected: (date) {
-              setState(() {
-                selectedDate = date;
-              });
-            },
+          ),
+          NavigationButtons(
+            currentStep: currentStep,
+            totalSteps: totalSteps,
+            onBack: prevStep,
+            onNext: isSending ? () {} : nextStep,
           ),
         ],
-      ),
-      bottomNavigationBar: NavigationButtons(
-        currentStep: currentStep,
-        totalSteps: totalSteps,
-        onBack: prevStep,
-        onNext: nextStep,
       ),
     );
   }
