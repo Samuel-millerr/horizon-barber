@@ -17,7 +17,7 @@ class BarberServiceInterface {
 
   factory BarberServiceInterface.fromJson(Map<String, dynamic> json) {
     return BarberServiceInterface(
-      id: json["id"] ?? "",
+      id: json["id"],
       name: json["name"] ?? "",
       description: json["description"] ?? "",
       price: json["price"] ?? "",

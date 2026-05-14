@@ -4,15 +4,15 @@ import "package:flutter/foundation.dart";
 class AppSession {
   AppSession._();
 
-  static final ValueNotifier<String?> userName = ValueNotifier<String?>(null);
+  static final ValueNotifier<String?> username = ValueNotifier<String?>(null);
 
-  static String? get currentUserName => userName.value;
+  static String? get currentUsername => username.value;
 
   static void saveUserName(String name) {
-    userName.value = name.trim();
+    username.value = name.trim();
   }
 
   static void clear() {
-    userName.value = null;
+    username.value = null;
   }
 }

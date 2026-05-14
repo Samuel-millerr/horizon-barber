@@ -60,7 +60,7 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
   }
 
   Future<void> finishAppointment() async {
-    final username = AppSession.currentUserName;
+    final username = AppSession.currentUsername;
     final service = selectedService;
 
     if (username == null || username.trim().isEmpty) {
@@ -76,8 +76,10 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
     setState(() => isSending = true);
 
     try {
-      await ApiService.createAppointment(userName: username, service: service);
+      await ApiService.createAppointment(username: username, service: service);
 
+      print(username);
+      print(service);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Agendamento enviado com sucesso")),

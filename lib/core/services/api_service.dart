@@ -64,6 +64,21 @@ class ApiService {
     }
   }
 
+  static Future<Map<String, dynamic>> getCurrentUser(final username) async {
+    final url = Uri.parse("$_baseUrl/users?username=$username");
+    final response = await http.get(url);
+    final responseData = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      return {"success": true, "message": responseData};
+    } else {
+      return {
+        "success": false,
+        "message": responseData['detail'] ?? "Erro desconhecido",
+      };
+    }
+  }
+
   static Future<Map<String, dynamic>> getBarberServices() async {
     final url = Uri.parse("$_baseUrl/barber-services");
     final response = await http.get(url);
@@ -73,11 +88,11 @@ class ApiService {
   }
 
   static Future<void> createAppointment({
-    required String userName,
+    required String username,
     required BarberServiceInterface service,
   }) async {
     final body = {
-      "user_name": userName,
+      "user_name": username,
       "service_id": service.id,
       "service_name": service.name,
     };

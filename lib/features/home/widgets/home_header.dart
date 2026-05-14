@@ -32,7 +32,7 @@ class HomeHeader extends StatelessWidget {
             style: AppFonts.condFont(size: 15, color: AppColors.textMuted),
           ),
           ValueListenableBuilder<String?>(
-            valueListenable: AppSession.userName,
+            valueListenable: AppSession.username,
             builder: (context, userName, _) {
               return Text(
                 userName?.isNotEmpty == true ? userName! : "Cliente",
