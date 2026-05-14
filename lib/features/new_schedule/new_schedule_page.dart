@@ -76,15 +76,17 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
     setState(() => isSending = true);
 
     try {
-      await ApiService.createAppointment(username: username, service: service);
+      await ApiService.createAppointment(
+        username: username,
+        service: service,
+        observation: '',
+      );
 
-      print(username);
-      print(service);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Agendamento enviado com sucesso")),
       );
-      context.go("tela nova de agenda do usuario");
+      context.go("/home");
     } finally {
       if (mounted) setState(() => isSending = false);
     }

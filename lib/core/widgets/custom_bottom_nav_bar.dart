@@ -9,7 +9,7 @@ class CustomBottomNavBar extends StatelessWidget {
   static const routes = [
     "/home",
     "/new-schedule",
-    "/employee-schedule",
+    "/user-schedule",
     "/profile",
   ];
 

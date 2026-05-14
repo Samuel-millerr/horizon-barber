@@ -90,11 +90,12 @@ class ApiService {
   static Future<void> createAppointment({
     required String username,
     required BarberServiceInterface service,
+    required String observation,
   }) async {
     final body = {
-      "user_name": username,
+      "username": username,
       "service_id": service.id,
-      "service_name": service.name,
+      "observation": observation,
     };
 
     debugPrint("Enviando agendamento para API: $body");

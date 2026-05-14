@@ -21,7 +21,7 @@ final GoRouter appRouter = GoRouter(
           builder: (_, _) => const NewSchedulePage(),
         ),
         GoRoute(
-          path: "/employee-schedule",
+          path: "/user-schedule",
           builder: (_, _) => const UserSchedulePage(),
         ),
         GoRoute(path: "/profile", builder: (_, _) => const ProfilePage()),
