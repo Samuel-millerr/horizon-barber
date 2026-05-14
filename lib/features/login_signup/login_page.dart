@@ -33,15 +33,30 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final username = _nameController.text.trim();
-      await ApiService.login(
-        username: username,
-        password: _passwordController.text,
-      );
 
-      AppSession.saveUserName(username);
+      final result = await ApiService.login(
+        username: username,
+        password: _passwordController.text.trim(),
+      );
       if (!mounted) return;
-      
-      context.go("/home");
+
+      final success = result["success"] == true;
+      final message = result["message"]?.toString() ?? "Erro ao cadastrar";
+
+      if (success) {
+        AppSession.saveUserName(username);
+
+        context.go("/home");
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Login realizado com sucesso!")),
+        );
+        return;
+      }
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }

@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:horizon_barber/core/services/api_service.dart';
 import 'package:horizon_barber/core/widgets/body_title.dart';
 import 'package:horizon_barber/features/home/widgets/scheduling_card.dart';
 import 'package:horizon_barber/interfaces/barber_service_interface.dart';
 
-class HomeBody extends StatelessWidget {
-  final List<Map<String, dynamic>> barberServices = [
-    {"id": 1, "name": "Corte Classico", "price": 35.00, "durationMinutes": 30},
-    {"id": 2, "name": "Corte Classico", "price": 35.00, "durationMinutes": 30},
-  ];
-  HomeBody({super.key});
+class HomeBody extends StatefulWidget {
+  const HomeBody({super.key});
+
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
+  List<dynamic> barberServices = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    try {
+      final result = await ApiService.getBarberServices();
+      setState(() {
+        barberServices = result["message"];
+      });
+    } catch (e) {
+      print("Erro ao carregar: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -14,7 +14,7 @@ class ApiService {
   }) async {
     try {
       final url = Uri.parse("$_baseUrl/users/login");
-      final body = jsonEncode({"user_name": username, "password": password});
+      final body = jsonEncode({"username": username, "password": password});
 
       final response = await http.post(
         url,
@@ -62,6 +62,14 @@ class ApiService {
     } catch (e) {
       return {"success": false, "message": "Falha na conexão com o servidor."};
     }
+  }
+
+  static Future<Map<String, dynamic>> getBarberServices() async {
+    final url = Uri.parse("$_baseUrl/barber-services");
+    final response = await http.get(url);
+    final responseData = jsonDecode(response.body);
+
+    return {"success": true, "message": responseData};
   }
 
   static Future<void> createAppointment({

@@ -1,8 +1,8 @@
 class BarberServiceInterface {
   final int id;
   final String name;
-  final double price;
   final String description;
+  final double price;
   final int durationMinutes;
   final String icon;
 
@@ -21,7 +21,7 @@ class BarberServiceInterface {
       name: json["name"] ?? "",
       description: json["description"] ?? "",
       price: json["price"] ?? "",
-      durationMinutes: json["durationMinutes"] ?? 0,
+      durationMinutes: json["duration_minutes"] ?? 0,
       icon: json["icon"] ?? "",
     );
   }
