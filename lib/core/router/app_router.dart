@@ -10,7 +10,7 @@ final GoRouter appRouter = GoRouter(
   initialLocation: "/login",
   routes: [
     GoRoute(path: "/login", builder: (_, _) => const LoginPage()),
-    GoRoute(path: "/signup", builder: (_, _) => const SingUpPage()),
+    GoRoute(path: "/signup", builder: (_, _) => const SignUpPage()),
     ShellRoute(
       builder: (context, state, child) => MainScaffold(child: child),
       routes: [

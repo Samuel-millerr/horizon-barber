@@ -32,14 +32,15 @@ class _LoginPageState extends State<LoginPage> {
     setState(() => _isLoading = true);
 
     try {
-      final userName = _nameController.text.trim();
+      final username = _nameController.text.trim();
       await ApiService.login(
-        userName: userName,
+        username: username,
         password: _passwordController.text,
       );
-      AppSession.saveUserName(userName);
 
+      AppSession.saveUserName(username);
       if (!mounted) return;
+      
       context.go("/home");
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -128,6 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                     InkWell(
                       onTap: () => context.push("/signup"),
                       child: Text(
+                        textAlign: TextAlign.center,
                         "Não tem uma conta? Se cadastre",
                         style: AppFonts.condFont(
                           size: 16,

@@ -6,14 +6,14 @@ import "package:horizon_barber/core/utils/app_fonts.dart";
 import "package:horizon_barber/features/login_signup/widgets/login_field.dart";
 import "package:horizon_barber/interfaces/user_interface.dart";
 
-class SingUpPage extends StatefulWidget {
-  const SingUpPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SingUpPage> createState() => _SingUpPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SingUpPageState extends State<SingUpPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -36,21 +36,32 @@ class _SingUpPageState extends State<SingUpPage> {
     setState(() => _isLoading = true);
 
     try {
-      UserInterface user = UserInterface(
+      final photoUrl = _photoUrlController.text.trim();
+      final user = UserInterface(
         username: _nameController.text.trim(),
-        password: _passwordController.text.trim(),
+        password: _passwordController.text,
         number: _numberController.text.trim(),
-        photoUrl: _photoUrlController.text.trim(),
+        photoUrl: photoUrl.isEmpty ? "" : photoUrl,
       );
 
       final result = await ApiService.register(user: user.toJson());
+      if (!mounted) return;
 
-      if (result["success"]) {
-        
+      final success = result["success"] == true;
+      final message = result["message"]?.toString() ?? "Erro ao cadastrar";
+
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Cadastro realizado com sucesso!")),
+        );
+
+        context.go("/login");
+        return;
       }
 
-      if (!mounted) return;
-      context.go("/login");
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -120,7 +131,7 @@ class _SingUpPageState extends State<SingUpPage> {
                       label: "Número",
                       icon: Icons.phone,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null || value.trim().isEmpty) {
                           return "Informe seu número de telefone";
                         }
                         return null;
@@ -129,11 +140,8 @@ class _SingUpPageState extends State<SingUpPage> {
                     const SizedBox(height: 14),
                     LoginField(
                       controller: _photoUrlController,
-                      label: "Foto",
+                      label: "Foto (opcional)",
                       icon: Icons.photo,
-                      validator: (value) {
-                        return null;
-                      },
                     ),
                     const SizedBox(height: 22),
                     ElevatedButton(
@@ -155,11 +163,12 @@ class _SingUpPageState extends State<SingUpPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     InkWell(
                       onTap: () => context.push("/login"),
                       child: Text(
                         "Já tem uma conta? Faça login",
+                        textAlign: TextAlign.center,
                         style: AppFonts.condFont(
                           size: 16,
                           weight: FontWeight.w500,
