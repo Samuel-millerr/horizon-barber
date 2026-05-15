@@ -31,16 +31,21 @@ class _ServiceSelectionPaneState extends State<ServiceSelectionPane> {
     try {
       final result = await ApiService.getBarberServices();
 
-      // 2. Convertemos a lista de Maps em uma lista de Objetos BarberServiceInterface
       final List<dynamic> data = result["message"];
+
+      if (!mounted) return;
 
       setState(() {
         barberServices = data
-            .map((item) => BarberServiceInterface.fromJson(item))
+            .map(
+              (item) => BarberServiceInterface.fromJson(
+                Map<String, dynamic>.from(item as Map),
+              ),
+            )
             .toList();
       });
     } catch (e) {
-      print("Erro ao carregar: $e");
+      debugPrint("Erro ao carregar servicos: $e");
     }
   }
 

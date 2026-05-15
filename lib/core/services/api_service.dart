@@ -4,7 +4,7 @@ import "package:horizon_barber/interfaces/barber_service_interface.dart";
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String _baseUrl = "http://localhost:8000";
+  static const String _baseUrl = "https://horizon-barber-api.onrender.com";
   ApiService._();
 
   static Future<Map<String, dynamic>> login({

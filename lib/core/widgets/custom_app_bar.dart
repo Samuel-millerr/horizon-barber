@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Barber Horizon",
+            "Horizon Barber",
             style: AppFonts.mainFont(color: AppColors.gold, size: 22),
           ),
           Text(

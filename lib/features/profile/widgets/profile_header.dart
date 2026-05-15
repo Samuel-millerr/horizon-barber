@@ -28,16 +28,20 @@ class _ProfileHeaderState extends State<ProfileHeader> {
   Future<void> _loadData() async {
     try {
       final username = AppSession.currentUsername;
+      if (username == null || username.trim().isEmpty) return;
+
       final result = await ApiService.getCurrentUser(username);
+
+      if (!mounted || result["success"] != true) return;
 
       setState(() {
         final user = UserInterface.fromJson(result["message"]);
 
         currentUserInfo = user;
-        userCreatedAt = dataFormmatter(user.createdAt!);
+        userCreatedAt = dataFormmatter(user.createdAt ?? "");
       });
     } catch (e) {
-      print("Erro ao carregar: $e");
+      debugPrint("Erro ao carregar perfil: $e");
     }
   }
 

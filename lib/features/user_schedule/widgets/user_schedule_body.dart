@@ -40,7 +40,7 @@ class _UserScheduleBodyState extends State<UserScheduleBody> {
         appointments = (result["message"] as List)
             .map(
               (item) => UserAppointmentInterface.fromJson(
-                item as Map<String, dynamic>,
+                Map<String, dynamic>.from(item as Map),
               ),
             )
             .toList();

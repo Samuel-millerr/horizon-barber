@@ -12,6 +12,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      title: "Horizon Barber",
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.bg,
         colorScheme: ColorScheme.dark(),

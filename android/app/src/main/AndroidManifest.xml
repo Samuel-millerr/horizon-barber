@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="horizon_barber"
+        android:label="Horizon Barber"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

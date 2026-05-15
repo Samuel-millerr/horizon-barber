@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      "Barber Horizon",
+                      "Horizon Barber",
                       textAlign: TextAlign.center,
                       style: AppFonts.mainFont(
                         color: AppColors.gold,

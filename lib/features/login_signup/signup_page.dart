@@ -83,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      "Barber Horizon",
+                      "Horizon Barber",
                       textAlign: TextAlign.center,
                       style: AppFonts.mainFont(
                         color: AppColors.gold,

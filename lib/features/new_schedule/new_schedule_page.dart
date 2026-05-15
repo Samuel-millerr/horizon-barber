@@ -93,6 +93,7 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
           const SnackBar(content: Text("Agendamento enviado com sucesso")),
         );
         context.go("/user-schedule");
+        return;
       }
 
       ScaffoldMessenger.of(
