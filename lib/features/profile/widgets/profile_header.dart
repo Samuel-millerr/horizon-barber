@@ -69,8 +69,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               Avatar(
                 borderColor: AppColors.gold,
                 size: 72,
-                photoUrl:
-                    "https://avatars.githubusercontent.com/u/196840558?v=4&size=64",
+                photoUrl: currentUserInfo!.photoUrl ?? "",
               ),
               Text(
                 currentUserInfo!.username,

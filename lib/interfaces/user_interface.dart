@@ -18,7 +18,7 @@ class UserInterface {
       "username": username,
       "password": password,
       "number": number,
-      "photoUrl": photoUrl,
+      "url_photo": photoUrl,
     };
   }
 
@@ -27,7 +27,7 @@ class UserInterface {
       username: json["username"] ?? "",
       password: json["password"] ?? "",
       number: json["number"] ?? "",
-      photoUrl: json["photoUrl"],
+      photoUrl: json["photoUrl"] ?? json["url_photo"],
       createdAt: json["created_at"],
     );
   }

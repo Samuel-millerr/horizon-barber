@@ -17,9 +17,12 @@ class ProfileBody extends StatelessWidget {
         "serviceIconColor": AppColors.danger,
       },
       {
-        "serviceIcon": Icons.star,
-        "serviceTitle": "Avaliar App",
+        "serviceIcon": Icons.edit,
+        "serviceTitle": "Editar Perfil",
         "serviceIconColor": AppColors.gold,
+        "function": () {
+          context.go("/edit-profile");
+        },
       },
       {
         "serviceIcon": Icons.door_back_door,

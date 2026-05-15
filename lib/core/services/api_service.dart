@@ -1,6 +1,5 @@
 import "dart:convert";
 
-import "package:flutter/foundation.dart";
 import "package:horizon_barber/interfaces/barber_service_interface.dart";
 import 'package:http/http.dart' as http;
 
@@ -76,6 +75,38 @@ class ApiService {
         "success": false,
         "message": responseData['detail'] ?? "Erro desconhecido",
       };
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateCurrentUser({
+    required String username,
+    required String number,
+    required String photoUrl,
+  }) async {
+    try {
+      final url = Uri.parse("$_baseUrl/users?username=$username");
+      final body = jsonEncode({"number": number, "photoUrl": photoUrl});
+
+      final response = await http.patch(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      );
+
+      final dynamic responseData = response.body.isEmpty
+          ? null
+          : jsonDecode(response.body);
+      final message = responseData is Map<String, dynamic>
+          ? responseData['detail'] ?? "Erro desconhecido"
+          : "Erro desconhecido";
+
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        return {"success": true, "message": responseData};
+      } else {
+        return {"success": false, "message": message};
+      }
+    } catch (e) {
+      return {"success": false, "message": "Falha na conexao com o servidor."};
     }
   }
 
