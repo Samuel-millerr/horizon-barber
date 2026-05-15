@@ -1,25 +1,10 @@
 import "package:flutter/material.dart";
 import "package:horizon_barber/core/utils/app_colors.dart";
 import "package:horizon_barber/core/utils/app_fonts.dart";
-
-class EmployeeAppointment {
-  final String employeeName;
-  final String serviceName;
-  final String? priceLabel;
-  final String? durationLabel;
-  final String statusLabel;
-
-  const EmployeeAppointment({
-    required this.employeeName,
-    required this.serviceName,
-    this.priceLabel,
-    this.durationLabel,
-    this.statusLabel = "Agendado",
-  });
-}
+import "package:horizon_barber/interfaces/user_appointment_interface.dart";
 
 class UserAppointmentCard extends StatelessWidget {
-  final EmployeeAppointment appointment;
+  final UserAppointmentInterface appointment;
   final VoidCallback onCancel;
 
   const UserAppointmentCard({
@@ -30,18 +15,20 @@ class UserAppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final observation = appointment.observation.trim();
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppColors.border),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withAlpha(28),
-            blurRadius: 14,
-            offset: const Offset(0, 8),
+            color: Colors.black.withAlpha(32),
+            blurRadius: 18,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
@@ -52,16 +39,17 @@ class UserAppointmentCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 42,
-                height: 42,
+                width: 46,
+                height: 46,
                 decoration: BoxDecoration(
                   color: AppColors.gold.withAlpha(18),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppColors.gold.withAlpha(70)),
                 ),
-                child: const Icon(
-                  Icons.content_cut,
-                  color: AppColors.gold,
-                  size: 21,
+                alignment: Alignment.center,
+                child: Text(
+                  appointment.serviceIcon,
+                  style: const TextStyle(fontSize: 22),
                 ),
               ),
               const SizedBox(width: 12),
@@ -81,7 +69,7 @@ class UserAppointmentCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      "Com ${appointment.employeeName}",
+                      "Com ${appointment.barberName}",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppFonts.bodyFont(
@@ -95,10 +83,7 @@ class UserAppointmentCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 6,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
                 decoration: BoxDecoration(
                   color: AppColors.success.withAlpha(18),
                   borderRadius: BorderRadius.circular(8),
@@ -115,6 +100,50 @@ class UserAppointmentCard extends StatelessWidget {
               ),
             ],
           ),
+          if (observation.isNotEmpty) ...[
+            const SizedBox(height: 14),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.surface2,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppColors.border),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.notes_outlined,
+                        color: AppColors.gold.withAlpha(210),
+                        size: 16,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        "Observacao",
+                        style: AppFonts.condFont(
+                          color: AppColors.gold,
+                          size: 13,
+                          weight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    observation,
+                    style: AppFonts.bodyFont(
+                      color: AppColors.text,
+                      size: 13,
+                      weight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,

@@ -37,7 +37,7 @@ class _HomeBodyState extends State<HomeBody> {
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BodyTitle(title: "SERVIÇOS POPULARES"),
           const SizedBox(height: 10),

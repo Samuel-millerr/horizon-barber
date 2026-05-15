@@ -17,6 +17,7 @@ class NewSchedulePage extends StatefulWidget {
 
 class _NewSchedulePageState extends State<NewSchedulePage> {
   final PageController pageController = PageController();
+  final TextEditingController observationController = TextEditingController();
   int currentStep = 0;
   final int totalSteps = 2;
   BarberServiceInterface? selectedService;
@@ -25,6 +26,7 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
   @override
   void dispose() {
     pageController.dispose();
+    observationController.dispose();
     super.dispose();
   }
 
@@ -76,17 +78,26 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
     setState(() => isSending = true);
 
     try {
-      await ApiService.createAppointment(
+      final result = await ApiService.createAppointment(
         username: username,
         service: service,
-        observation: '',
+        observation: observationController.text.trim(),
       );
-
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Agendamento enviado com sucesso")),
-      );
-      context.go("/home");
+
+      final success = result["success"] == true;
+      final message = result["message"]?.toString() ?? "Erro ao cadastrar";
+
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Agendamento enviado com sucesso")),
+        );
+        context.go("/user-schedule");
+      }
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) setState(() => isSending = false);
     }
@@ -106,6 +117,7 @@ class _NewSchedulePageState extends State<NewSchedulePage> {
             currentStep: currentStep,
             pageController: pageController,
             selectedService: selectedService,
+            observationController: observationController,
             onServiceSelected: (service) {
               setState(() {
                 selectedService = service;

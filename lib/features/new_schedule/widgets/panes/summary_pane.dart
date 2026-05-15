@@ -6,8 +6,13 @@ import "package:horizon_barber/interfaces/barber_service_interface.dart";
 
 class SummaryPane extends StatelessWidget {
   final BarberServiceInterface? selectedService;
+  final TextEditingController observationController;
 
-  const SummaryPane({super.key, required this.selectedService});
+  const SummaryPane({
+    super.key,
+    required this.selectedService,
+    required this.observationController,
+  });
 
   String get formattedPrice {
     final price = selectedService?.price ?? 0;
@@ -16,7 +21,7 @@ class SummaryPane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Container(
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +33,7 @@ class SummaryPane extends StatelessWidget {
             formattedPrice: formattedPrice,
           ),
           const SizedBox(height: 16),
-          const _NotesCard(),
+          _NotesCard(controller: observationController),
         ],
       ),
     );
@@ -59,7 +64,7 @@ class SummaryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "RESUMO DO PEDIDO",
+            "RESUMO DO AGENDAMENTO",
             style: AppFonts.condFont(
               color: AppColors.gold,
               size: 14,
@@ -152,7 +157,9 @@ class SummaryDivider extends StatelessWidget {
 }
 
 class _NotesCard extends StatelessWidget {
-  const _NotesCard();
+  final TextEditingController controller;
+
+  const _NotesCard({required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -177,6 +184,7 @@ class _NotesCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           TextField(
+            controller: controller,
             maxLines: 3,
             cursorColor: AppColors.gold,
             style: AppFonts.bodyFont(color: AppColors.text, size: 13),

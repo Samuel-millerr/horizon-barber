@@ -16,8 +16,8 @@ class UserAppointmentInterface {
   factory UserAppointmentInterface.fromJson(Map<String, dynamic> json) {
     return UserAppointmentInterface(
       id: json["id"],
-      serviceName: json[""],
-      serviceIcon: json["service_name"],
+      serviceName: json["service_name"],
+      serviceIcon: json["service_icon"],
       barberName: json["barber_name"],
       observation: json["observation"],
     );

@@ -8,6 +8,7 @@ class NewScheduleBody extends StatelessWidget {
   final int currentStep;
   final PageController pageController;
   final BarberServiceInterface? selectedService;
+  final TextEditingController observationController;
   final Function(BarberServiceInterface) onServiceSelected;
 
   const NewScheduleBody({
@@ -15,6 +16,7 @@ class NewScheduleBody extends StatelessWidget {
     required this.currentStep,
     required this.pageController,
     required this.selectedService,
+    required this.observationController,
     required this.onServiceSelected,
   });
 
@@ -44,7 +46,10 @@ class NewScheduleBody extends StatelessWidget {
                     horizontal: 22,
                     vertical: 16,
                   ),
-                  child: SummaryPane(selectedService: selectedService),
+                  child: SummaryPane(
+                    selectedService: selectedService,
+                    observationController: observationController,
+                  ),
                 ),
               ],
             ),
